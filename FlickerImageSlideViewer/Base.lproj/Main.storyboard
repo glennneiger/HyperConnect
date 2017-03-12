@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Entry View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="EntryViewController" customModule="FlickerImageSlideViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBe-Pb-cmf">
+                                <rect key="frame" x="150" y="310.5" width="74" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="시    작"/>
+                                <connections>
+                                    <segue destination="yr6-JD-ANu" kind="presentation" id="ZZE-9U-5L4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DBe-Pb-cmf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="M7A-4a-EpL"/>
+                            <constraint firstItem="DBe-Pb-cmf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OzQ-Zb-ghz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Photo Viewer View Controller-->
+        <scene sceneID="W3P-nw-iwg">
+            <objects>
+                <viewController id="yr6-JD-ANu" customClass="PhotoViewerViewController" customModule="FlickerImageSlideViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gWx-su-Sw7"/>
+                        <viewControllerLayoutGuide type="bottom" id="bU6-c5-4YH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yoN-Wu-0JS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="PJl-6N-ghb">
+                                <rect key="frame" x="14" y="583" width="347" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CRb-Yy-yo4"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="slideShowIntervalChangeWithSender:" destination="yr6-JD-ANu" eventType="valueChanged" id="rXd-qD-T5L"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Poi-uk-uy6">
+                                <rect key="frame" x="166" y="621" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98x-04-0Ai">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="535"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Poi-uk-uy6" firstAttribute="top" secondItem="PJl-6N-ghb" secondAttribute="bottom" constant="8" id="3TS-wf-xhU"/>
+                            <constraint firstItem="PJl-6N-ghb" firstAttribute="centerX" secondItem="yoN-Wu-0JS" secondAttribute="centerX" id="91P-Nv-pU1"/>
+                            <constraint firstItem="PJl-6N-ghb" firstAttribute="leading" secondItem="yoN-Wu-0JS" secondAttribute="leadingMargin" id="BfZ-1j-GPa"/>
+                            <constraint firstItem="98x-04-0Ai" firstAttribute="top" secondItem="yoN-Wu-0JS" secondAttribute="top" id="Q88-2R-d1L"/>
+                            <constraint firstItem="PJl-6N-ghb" firstAttribute="trailing" secondItem="yoN-Wu-0JS" secondAttribute="trailingMargin" id="Vf9-f3-cOB"/>
+                            <constraint firstAttribute="trailing" secondItem="98x-04-0Ai" secondAttribute="trailing" id="asZ-gN-6WM"/>
+                            <constraint firstItem="PJl-6N-ghb" firstAttribute="top" secondItem="98x-04-0Ai" secondAttribute="bottom" constant="48" id="kJ7-Ai-9d8"/>
+                            <constraint firstItem="bU6-c5-4YH" firstAttribute="top" secondItem="Poi-uk-uy6" secondAttribute="bottom" constant="25" id="o0v-q4-JdE"/>
+                            <constraint firstItem="Poi-uk-uy6" firstAttribute="centerX" secondItem="yoN-Wu-0JS" secondAttribute="centerX" id="oIx-vv-d8o"/>
+                            <constraint firstItem="98x-04-0Ai" firstAttribute="leading" secondItem="yoN-Wu-0JS" secondAttribute="leading" id="zH2-VJ-wVB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photoBaseView" destination="98x-04-0Ai" id="Hnj-3q-QGg"/>
+                        <outlet property="slideShowIntervalControlSlider" destination="PJl-6N-ghb" id="DxU-NE-BNq"/>
+                        <outlet property="slideShowIntervalLabel" destination="Poi-uk-uy6" id="eAr-eS-cJq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YJf-Un-gvP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933.60000000000002" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>
