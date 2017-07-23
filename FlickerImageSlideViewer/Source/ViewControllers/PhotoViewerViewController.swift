@@ -15,6 +15,10 @@ class PhotoViewerViewController: UIViewController {
     @IBOutlet weak var slideShowIntervalControlSlider: UISlider!
     @IBOutlet weak var slideShowIntervalLabel: UILabel!
     
+    static let prevPhotoCnt = 4
+    
+    var isRunning: Bool = false
+    
     let photoManager = PhotoManager()
     var currentPhotoImageView: UIImageView? = nil
     
@@ -30,8 +34,19 @@ class PhotoViewerViewController: UIViewController {
         applyStyle()
         
         slideShowInterval = Int(slideShowIntervalControlSlider.value)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        isRunning = true
         updatePhoto()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        isRunning = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +62,11 @@ class PhotoViewerViewController: UIViewController {
 //        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 //        photoBaseView.addSubview(indicator)
         
-        photoManager.getPhotoList { (photo) in
+        if isRunning == false {
+            return
+        }
+        
+        photoManager.fetchNextPhoto(isOnline: true) { (photo) in
             if let photo = photo {
                 self.showNextPhoto(photo: photo)
             }

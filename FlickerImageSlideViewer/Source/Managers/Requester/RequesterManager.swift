@@ -16,9 +16,10 @@ class RequesterManager {
     }
     
     func requestPhotos(completion: @escaping (Bool, PhotoFeedModel?) -> Void) -> DataRequest? {
+        let urlString = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
         // https://www.flickr.com/services/api/response.json.html
         // 함수 래퍼를 지우려면 nojsoncallback=1 설정
-        guard let url = URL(string: "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1") else {
+        guard let url = URL(string: urlString) else {
             return nil
         }
         

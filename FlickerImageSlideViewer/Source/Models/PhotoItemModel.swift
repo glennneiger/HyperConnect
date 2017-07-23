@@ -25,6 +25,28 @@ class PhotoItemModel: AnyObject {
         }
     }
     
+    var fileName: String? {
+        get {
+            guard let imageURL = self.imageURL else {
+                return nil
+            }
+            
+            let components = imageURL.components(separatedBy: "/")
+            var fileName: String
+            if components.count == 5 {
+                fileName = components[3] + "-" + components[4]
+            } else {
+                guard let last = components.last else {
+                    return nil
+                }
+                
+                fileName = last
+            }
+            
+            return fileName
+        }
+    }
+    
     init(json: [String: Any]) {
         if let value = json["title"] as? String {
             title = value
@@ -53,7 +75,5 @@ class PhotoItemModel: AnyObject {
         if let value = json["tags"] as? [String] {
             tags = value
         }
-        
-        
     }
 }
