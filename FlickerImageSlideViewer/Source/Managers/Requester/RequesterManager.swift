@@ -9,11 +9,8 @@
 import Foundation
 import Alamofire
 
-class RequesterManager {
-    fileprivate static let requesterManagerSharedInstance = RequesterManager()
-    class func sharedManager() -> RequesterManager {
-        return requesterManagerSharedInstance
-    }
+final class RequesterManager {
+    static let shareManager = RequesterManager()
     
     func requestPhotos(completion: @escaping (Bool, PhotoFeedModel?) -> Void) -> DataRequest? {
         let urlString = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
@@ -24,6 +21,8 @@ class RequesterManager {
         }
         
         let request: DataRequest = Alamofire.request(url).responseJSON(queue: DispatchQueue.global(qos: .background), options: .allowFragments) { (response) in
+            
+            print("\(url)")
             
             // Background -> Main
             // UI Update Issue
@@ -43,8 +42,6 @@ class RequesterManager {
                 DispatchQueue.main.async { completion(false, nil) }
             }
         }
-        
-        print("\(url)")
         
         return request
     }

@@ -12,9 +12,8 @@ class PreferenceViewController: UIViewController {
     
     @IBOutlet weak var maxAutoDownloadPhotoCountControlSlider: UISlider!
     @IBOutlet weak var maxAutoDownloadPhotoCountLabel: UILabel!
-    @IBOutlet weak var pageAnimationSegmentControl: UISegmentedControl!
     
-    let photoManager = PhotoManager()
+    let photoManager = PhotoManager.sharedManager
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +35,46 @@ class PreferenceViewController: UIViewController {
     @IBAction func maxAutoDownloadPhotoCountIntervalChange(sender: UISlider) {
         let changeValue = Int(sender.value)
         
-        photoManager.maxDownloadPhotoCount = changeValue
+        var message: String? = nil
+        if changeValue < photoManager.downloadPhotos.count {
+            if changeValue < photoManager.lockedPhotos.count {
+                message = "잠금된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
+            } else {
+                message = "저장된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
+            }
+        } else if changeValue < photoManager.lockedPhotos.count {
+            message = "잠금된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
+        } else {
+            photoManager.maxDownloadPhotoCount = changeValue
+        }
+        
+        if let message = message {
+            let alert = UIAlertController(title: "경고", message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .destructive, handler: { (action) in
+                self.photoManager.maxDownloadPhotoCount = changeValue
+            })
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: { (action) in
+                
+            })
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
         updateMaxAutoDownloadPhotoCountLabel()
+    }
+    
+    @IBAction func updateSlideShowAnimation(button: UIButton) {
+        guard let animation = SlideShowAnimation(rawValue: button.tag) else {
+            return
+        }
+        
+        button.isSelected = !button.isSelected
+        if button.isSelected {
+            SlideShowPreference.sharedManager.appendSlideShowAnimation(animation: animation)
+        } else {
+            SlideShowPreference.sharedManager.removeSlideShowAnimation(animation: animation)
+        }
     }
     
 

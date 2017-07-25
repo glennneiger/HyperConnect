@@ -14,7 +14,7 @@ class PhotoFeedModel: AnyObject {
     var description: String = ""
     var modified: Date? = nil
     var generator: String = ""
-    var items: [PhotoItemModel] = [PhotoItemModel]()
+    var photos: [PhotoModel] = [PhotoModel]()
     
     init(json: [String: Any]) {
         if let value = json["title"] as? String {
@@ -33,8 +33,8 @@ class PhotoFeedModel: AnyObject {
             generator = value
         }
         if let value = json["items"] as? [[String: Any]] {
-            items = value.flatMap { (raw) -> PhotoItemModel in
-                let item = PhotoItemModel(json: raw)
+            photos = value.flatMap { (raw) -> PhotoModel in
+                let item = PhotoModel(json: raw)
                 return item
             }
         }

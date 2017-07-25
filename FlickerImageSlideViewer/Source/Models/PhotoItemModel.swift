@@ -25,27 +25,36 @@ class PhotoItemModel: AnyObject {
         }
     }
     
-    var fileName: String? {
-        get {
-            guard let imageURL = self.imageURL else {
+    lazy var fileName: String? = {
+        guard let imageURL = self.imageURL else {
+            return nil
+        }
+        
+        let components = imageURL.components(separatedBy: "/")
+        var fileName: String
+        if components.count == 5 {
+            fileName = components[3] + "-" + components[4]
+        } else {
+            guard let last = components.last else {
                 return nil
             }
             
-            let components = imageURL.components(separatedBy: "/")
-            var fileName: String
-            if components.count == 5 {
-                fileName = components[3] + "-" + components[4]
-            } else {
-                guard let last = components.last else {
-                    return nil
-                }
-                
-                fileName = last
-            }
-            
-            return fileName
+            fileName = last
         }
-    }
+        
+        return fileName
+    }()
+    
+    lazy var saveFileName: String? = {
+        guard let imageURL = self.imageURL, let fileName = self.fileName else {
+            return nil
+        }
+        
+        let curDate = Date()
+        let saveFileName = "\(curDate.timeIntervalSince1970)" + "-" + fileName
+        
+        return saveFileName
+    }()
     
     init(json: [String: Any]) {
         if let value = json["title"] as? String {

@@ -23,9 +23,36 @@ class Utils {
             return false
         }
         
+        let documentFileURL = documentURL.appendingPathComponent(fileName)
+        
+        return isFileExist(at: documentFileURL)
+    }
+    
+    class func isFileExist(at fileURL: URL) -> Bool {
+        guard let documentURL = applicationDocumentDirectory() else {
+            return false
+        }
+        
         let fileManager = FileManager.default
         
-        let documentFileURL = documentURL.appendingPathComponent(fileName)
-        return fileManager.fileExists(atPath:documentFileURL.path)
+        return fileManager.fileExists(atPath: fileURL.path)
+    }
+    
+    class func deleteFile(at fileURL: URL) -> Bool {
+        guard Utils.isFileExist(at: fileURL) else {
+            return false
+        }
+        
+        let fileManager = FileManager.default
+        
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+            print(error.localizedDescription)
+            
+            return false
+        }
+        
+        return true
     }
 }

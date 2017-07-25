@@ -1,5 +1,5 @@
 //
-//  PhotoViewerViewController.swift
+//  OnlinePhotoViewerViewController.swift
 //  FlickerImageSlideViewer
 //
 //  Created by Jaeyun,Oh on 2017. 3. 12..
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PhotoViewerViewController: UIViewController {
+class OnlinePhotoViewerViewController: UIViewController {
     
     @IBOutlet weak var photoBaseView: UIView!
     @IBOutlet weak var slideShowIntervalControlSlider: UISlider!
@@ -19,7 +19,7 @@ class PhotoViewerViewController: UIViewController {
     
     var isRunning: Bool = false
     
-    let photoManager = PhotoManager()
+    let photoManager = PhotoManager.sharedManager
     var currentPhotoImageView: UIImageView? = nil
     
     var slideShowInterval: Int = 0 {
