@@ -90,25 +90,39 @@ class OfflinePhotoDetailViewController: UIViewController {
         photoBaseView.addSubview(photoImageView)
         photoImageView.applyMarginConstraint(inset: .zero)
         
-//        let randomEffect = SlideShowPreference.sharedManager.randomEffect()
-//        UIViewAnimationOptions.
-        
-        photoImageView.alpha = 0.0
-        UIView.animate(withDuration: 0.3, animations: {
-            if let currentPhotoImageView = self.currentPhotoImageView {
-                currentPhotoImageView.alpha = 0.0
+        if let animation = SlideShowPreference.sharedManager.randomEffect() {
+            switch animation {
+            case .LeftTop: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: -photoImageView.frame.height)
+            case .RightBottom: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: photoImageView.frame.height)
+            case .Left: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: 0)
+            case .Right: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: 0)
+            case .Up: photoImageView.transform = CGAffineTransform(translationX: 0, y: -photoImageView.frame.height)
             }
             
-            photoImageView.alpha = 1.0
-        }, completion: { (completion) in
-            if let currentPhotoImageView = self.currentPhotoImageView {
-                currentPhotoImageView.removeFromSuperview()
-            }
-            
-            self.currentPhotoImageView = photoImageView
-            
-            self.updateStatusButtons()
-        })
+            UIView.animate(withDuration: 0.3, animations: {
+                photoImageView.transform = .identity
+            }, completion: { (completion) in
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.removeFromSuperview()
+                }
+                self.currentPhotoImageView = photoImageView
+            })
+        } else {
+            photoImageView.alpha = 0.0
+            UIView.animate(withDuration: 0.3, animations: {
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.alpha = 0.0
+                }
+                
+                photoImageView.alpha = 1.0
+            }, completion: { (completion) in
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.removeFromSuperview()
+                }
+                
+                self.currentPhotoImageView = photoImageView
+            })
+        }
     }
     
     func updateStatusButtons() {

@@ -236,36 +236,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhs-WS-qsW">
-                                <rect key="frame" x="160.5" y="105" width="53" height="30"/>
-                                <state key="normal" title="Fade-In"/>
+                                <rect key="frame" x="161" y="105" width="52" height="30"/>
+                                <state key="normal" title="LeftTop"/>
                                 <connections>
                                     <action selector="updateSlideShowAnimationWithButton:" destination="Tdo-m7-O0P" eventType="touchUpInside" id="8nG-NW-lYY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9F-h3-l5j">
-                                <rect key="frame" x="154" y="145" width="66" height="30"/>
-                                <state key="normal" title="Fade-Out"/>
+                                <rect key="frame" x="144" y="145" width="86" height="30"/>
+                                <state key="normal" title="RightBottom"/>
                                 <connections>
                                     <action selector="updateSlideShowAnimationWithButton:" destination="Tdo-m7-O0P" eventType="touchUpInside" id="18C-la-w1Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rkq-fS-AsS">
-                                <rect key="frame" x="160" y="185" width="55" height="30"/>
-                                <state key="normal" title="Curl-Up"/>
+                                <rect key="frame" x="172.5" y="185" width="30" height="30"/>
+                                <state key="normal" title="Left"/>
                                 <connections>
                                     <action selector="updateSlideShowAnimationWithButton:" destination="Tdo-m7-O0P" eventType="touchUpInside" id="bUZ-yW-IYM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRY-du-279">
-                                <rect key="frame" x="150" y="225" width="74" height="30"/>
-                                <state key="normal" title="Curl-Down"/>
+                                <rect key="frame" x="169" y="225" width="36" height="30"/>
+                                <state key="normal" title="Right"/>
                                 <connections>
                                     <action selector="updateSlideShowAnimationWithButton:" destination="Tdo-m7-O0P" eventType="touchUpInside" id="OcN-tb-wrd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNx-f1-3Wc">
-                                <rect key="frame" x="158" y="265" width="58" height="30"/>
-                                <state key="normal" title="Flip-Left"/>
+                                <rect key="frame" x="172" y="265" width="30" height="30"/>
+                                <state key="normal" title="Up"/>
                                 <connections>
                                     <action selector="updateSlideShowAnimationWithButton:" destination="Tdo-m7-O0P" eventType="touchUpInside" id="ctJ-N1-kQ5"/>
                                 </connections>
@@ -321,6 +321,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DOO-ZF-3Sz"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="slideShowIntervalChangeWithSender:" destination="g6G-zJ-PiQ" eventType="valueChanged" id="Qo2-Hf-MU8"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c27-zs-aXu">
                                 <rect key="frame" x="166" y="572" width="42" height="21"/>
@@ -344,9 +347,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Online" id="dvm-8b-wmx" userLabel="Online"/>
                     <connections>
+                        <outlet property="leftConstraint" destination="hj6-lC-FtH" id="VaY-4E-FMC"/>
                         <outlet property="photoBaseView" destination="cmD-7x-3a7" id="pbf-RI-OZJ"/>
+                        <outlet property="rightConstraint" destination="pea-YY-XG4" id="DHg-Of-fv9"/>
                         <outlet property="slideShowIntervalControlSlider" destination="bDT-8N-bxt" id="2k8-MO-J65"/>
                         <outlet property="slideShowIntervalLabel" destination="c27-zs-aXu" id="3Aq-y8-mHR"/>
+                        <outlet property="topConstraint" destination="VAv-Ee-o0n" id="Ca9-jN-u7E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="psf-md-gyg" userLabel="First Responder" sceneMemberID="firstResponder"/>

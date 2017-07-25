@@ -15,6 +15,10 @@ class OnlinePhotoViewerViewController: UIViewController {
     @IBOutlet weak var slideShowIntervalControlSlider: UISlider!
     @IBOutlet weak var slideShowIntervalLabel: UILabel!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    
     static let prevPhotoCnt = 4
     
     var isRunning: Bool = false
@@ -84,20 +88,57 @@ class OnlinePhotoViewerViewController: UIViewController {
         photoBaseView.addSubview(photoImageView)
         photoImageView.applyMarginConstraint(inset: .zero)
         
-        photoImageView.alpha = 0.0
-        UIView.animate(withDuration: 0.3, animations: { 
-            if let currentPhotoImageView = self.currentPhotoImageView {
-                currentPhotoImageView.alpha = 0.0
+        if let animation = SlideShowPreference.sharedManager.randomEffect() {
+            switch animation {
+            case .LeftTop: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: -photoImageView.frame.height)
+            case .RightBottom: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: photoImageView.frame.height)
+            case .Left: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: 0)
+            case .Right: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: 0)
+            case .Up: photoImageView.transform = CGAffineTransform(translationX: 0, y: -photoImageView.frame.height)
             }
             
-            photoImageView.alpha = 1.0
-        }, completion: { (completion) in
-            if let currentPhotoImageView = self.currentPhotoImageView {
-                currentPhotoImageView.removeFromSuperview()
-            }
-            
-            self.currentPhotoImageView = photoImageView
-        })
+            UIView.animate(withDuration: 0.3, animations: { 
+                photoImageView.transform = .identity
+            }, completion: { (completion) in
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.removeFromSuperview()
+                }
+                self.currentPhotoImageView = photoImageView
+            })
+//            UIView.animate(withDuration: 0.3, animations: {
+//                photoImageView.transform = .identity
+////                self.photoBaseView.layoutIfNeeded()
+//            }, completion: { (completion) in {
+//                switch animation {
+//                case .SizeUp: break
+//                case .SizeDown:break
+//                case .Left:break
+//                case .Right:break
+//                case .Up:break
+//                }
+//                
+//                if let currentPhotoImageView = self.currentPhotoImageView {
+//                    currentPhotoImageView.removeFromSuperview()
+//                }
+//                self.currentPhotoImageView = photoImageView
+//                }
+//            })
+        } else {
+            photoImageView.alpha = 0.0
+            UIView.animate(withDuration: 0.3, animations: {
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.alpha = 0.0
+                }
+                
+                photoImageView.alpha = 1.0
+            }, completion: { (completion) in
+                if let currentPhotoImageView = self.currentPhotoImageView {
+                    currentPhotoImageView.removeFromSuperview()
+                }
+                
+                self.currentPhotoImageView = photoImageView
+            })
+        }
     }
     
     private func updateUI() {

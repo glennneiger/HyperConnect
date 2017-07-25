@@ -9,11 +9,11 @@
 import UIKit
 
 enum SlideShowAnimation: Int {
-    case CurveEaseIn
-    case CurveEaseOut
-    case CurlUp
-    case CurlDown
-    case FlipLeft
+    case LeftTop
+    case RightBottom
+    case Left
+    case Right
+    case Up
 }
 
 final class SlideShowPreference {
@@ -22,9 +22,17 @@ final class SlideShowPreference {
     var slideShowInterval: Int = 4
     private var slideShowAnimations: [SlideShowAnimation] = [SlideShowAnimation]()
     
-    func randomEffect() -> UIViewAnimationOptions? {
+//    func randomEffect() -> UIViewAnimationOptions? {
+//        if slideShowAnimations.count > 0 {
+//            return viewAnimationOption(withSlideShowAnimation: slideShowAnimations[Int(arc4random_uniform(UInt32(slideShowAnimations.count)))])
+//        }
+//        
+//        return nil
+//    }
+    
+    func randomEffect() -> SlideShowAnimation? {
         if slideShowAnimations.count > 0 {
-            return viewAnimationOption(withSlideShowAnimation: slideShowAnimations[Int(arc4random_uniform(UInt32(slideShowAnimations.count)))])
+            return slideShowAnimations[Int(arc4random_uniform(UInt32(slideShowAnimations.count)))]
         }
         
         return nil
@@ -42,21 +50,21 @@ final class SlideShowPreference {
         }
     }
     
-    private func viewAnimationOption(withSlideShowAnimation: SlideShowAnimation) -> UIViewAnimationOptions? {
-        var viewAnimationOption: UIViewAnimationOptions? = nil
-        switch withSlideShowAnimation {
-        case .CurveEaseIn:
-            viewAnimationOption = .curveEaseIn
-        case .CurveEaseOut:
-            viewAnimationOption = .curveEaseOut
-        case .CurlUp:
-            viewAnimationOption = .transitionCurlUp
-        case .CurlDown:
-            viewAnimationOption = .transitionCurlDown
-        case .FlipLeft:
-            viewAnimationOption = .transitionFlipFromLeft
-        }
-        
-        return viewAnimationOption
-    }
+//    private func viewAnimationOption(withSlideShowAnimation: SlideShowAnimation) -> UIViewAnimationOptions? {
+//        var viewAnimationOption: UIViewAnimationOptions? = nil
+//        switch withSlideShowAnimation {
+//        case .CurveEaseIn:
+//            viewAnimationOption = .curveEaseIn
+//        case .CurveEaseOut:
+//            viewAnimationOption = .curveEaseOut
+//        case .CurlUp:
+//            viewAnimationOption = .transitionCurlUp
+//        case .CurlDown:
+//            viewAnimationOption = .transitionCurlDown
+//        case .FlipLeft:
+//            viewAnimationOption = .transitionFlipFromLeft
+//        }
+//        
+//        return viewAnimationOption
+//    }
 }
