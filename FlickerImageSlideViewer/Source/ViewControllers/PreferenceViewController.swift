@@ -38,12 +38,10 @@ class PreferenceViewController: UIViewController {
         var message: String? = nil
         if changeValue < photoManager.downloadPhotos.count {
             if changeValue < photoManager.lockedPhotos.count {
-                message = "잠금된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
+                message = "잠금된 사진수보다 작습니다. 장겨진 사진이 지워질 수 있습니다."
             } else {
                 message = "저장된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
             }
-        } else if changeValue < photoManager.lockedPhotos.count {
-            message = "잠금된 사진수보다 작습니다. 저장된 사진이 지워질 수 있습니다."
         } else {
             photoManager.maxDownloadPhotoCount = changeValue
         }
