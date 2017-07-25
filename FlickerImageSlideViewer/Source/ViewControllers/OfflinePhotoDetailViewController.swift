@@ -93,9 +93,9 @@ class OfflinePhotoDetailViewController: UIViewController {
         if let animation = SlideShowPreference.sharedManager.randomEffect() {
             switch animation {
             case .LeftTop: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: -photoImageView.frame.height)
-            case .RightBottom: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: photoImageView.frame.height)
-            case .Left: photoImageView.transform = CGAffineTransform(translationX: -photoImageView.frame.width, y: 0)
-            case .Right: photoImageView.transform = CGAffineTransform(translationX: photoImageView.frame.width, y: 0)
+            case .RightRotate: photoImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+            case .ScaleUp: photoImageView.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            case .ScaleDown: photoImageView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
             case .Up: photoImageView.transform = CGAffineTransform(translationX: 0, y: -photoImageView.frame.height)
             }
             

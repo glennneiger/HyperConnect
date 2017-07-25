@@ -10,9 +10,9 @@ import UIKit
 
 enum SlideShowAnimation: Int {
     case LeftTop
-    case RightBottom
-    case Left
-    case Right
+    case RightRotate
+    case ScaleUp
+    case ScaleDown
     case Up
 }
 
